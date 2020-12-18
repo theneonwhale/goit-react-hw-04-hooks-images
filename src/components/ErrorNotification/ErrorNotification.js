@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import s from './ErrorNotification.module.css';
 import errorImg from '../../images/error.png';
 
-function ErrorNotification({ message }) {
+export default function ErrorNotification({ message }) {
   return (
     <div className={s.ErrorNotification}>
       <p className={s.ErrorMessage}> {message} </p>
@@ -14,5 +14,3 @@ function ErrorNotification({ message }) {
 ErrorNotification.propTypes = {
   message: PropTypes.string.isRequired,
 };
-
-export default ErrorNotification;

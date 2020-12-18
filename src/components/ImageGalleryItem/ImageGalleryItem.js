@@ -1,7 +1,12 @@
 import PropTypes from 'prop-types';
 import s from './ImageGalleryItem.module.css';
 
-function ImageGalleryItem({ src, largeImageURL, alt, onOpenModal }) {
+export default function ImageGalleryItem({
+  src,
+  largeImageURL,
+  alt,
+  onOpenModal,
+}) {
   return (
     <li className={s.ImageGalleryItem}>
       <img
@@ -22,5 +27,3 @@ ImageGalleryItem.propTypes = {
   alt: PropTypes.string.isRequired,
   onOpenModal: PropTypes.func.isRequired,
 };
-
-export default ImageGalleryItem;

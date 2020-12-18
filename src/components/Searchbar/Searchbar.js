@@ -1,48 +1,40 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import s from './Searchbar.module.css';
 
-export default class Searchbar extends Component {
-  state = {
-    query: '',
+export default function Searchbar({ onSubmit }) {
+  const [query, setQuery] = useState('');
+
+  const handleQueryChange = e => {
+    setQuery(e.currentTarget.value.toLowerCase());
   };
 
-  handleQueryChange = e => {
-    this.setState({ query: e.currentTarget.value.toLowerCase() });
-  };
-
-  handleSubmit = event => {
-    event.preventDefault();
-
-    const { query } = this.state;
-    const { onSubmit } = this.props;
+  const handleSubmit = e => {
+    e.preventDefault();
 
     onSubmit(query);
-    this.setState({ query: '' });
+
+    setQuery('');
   };
 
-  render() {
-    const { query } = this.state;
-
-    return (
-      <header className={s.Searchbar}>
-        <form className={s.SearchForm} onSubmit={this.handleSubmit}>
-          <button className={s.SearchFormButton} type="submit">
-            <span className={s.SearchFormButtonLabel}>Search</span>
-          </button>
-          <input
-            className={s.SearchFormInput}
-            type="text"
-            autoComplete="off"
-            autoFocus
-            value={query}
-            onChange={this.handleQueryChange}
-            placeholder="Search images and photos"
-          />
-        </form>
-      </header>
-    );
-  }
+  return (
+    <header className={s.Searchbar}>
+      <form className={s.SearchForm} onSubmit={handleSubmit}>
+        <button className={s.SearchFormButton} type="submit">
+          <span className={s.SearchFormButtonLabel}>Search</span>
+        </button>
+        <input
+          className={s.SearchFormInput}
+          type="text"
+          autoComplete="off"
+          autoFocus
+          value={query}
+          onChange={handleQueryChange}
+          placeholder="Search images and photos"
+        />
+      </form>
+    </header>
+  );
 }
 
 Searchbar.propTypes = {
